@@ -1,6 +1,15 @@
 <?php
 $time = time();
-$message = date("d/m/Y", $time);
+
+$dateArray1 = date_create("2016-02-01");
+$timestamp1fevrier = date_timestamp_get($dateArray1);
+$date1 = date("d-m-Y", $timestamp1fevrier);
+
+$dateArray2 = date_create("2016-03-01");
+$timeDaystamp1mars = date_timestamp_get($dateArray2);
+$date2 = date("d-m-Y", $timeDaystamp1mars);
+
+$dayBetween = ($timeDaystamp1mars - $timestamp1fevrier) / (60 * 60 * 24);
 ?>
 
 <!DOCTYPE html>
@@ -16,11 +25,9 @@ $message = date("d/m/Y", $time);
     <h1>Exercice 6</h1>
     <p>Afficher le nombre de jour dans le mois de février de l'année 2016.</p>
 
-    <a href="index.php"><span style="background-color: lightblue;">Reset</span></a>
-
     <p>===================================</p>
 
-    <?= $message ?>
+    <?= $date1 . " - " . $date2 . " / il y a <b>" . $dayBetween . "</b> jours dans le mois de fevrier 2016." ?>
 
 </body>
 

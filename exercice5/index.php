@@ -1,6 +1,15 @@
 <?php
 $time = time();
-$message = date("d/m/Y", $time);
+
+$dateArray1 = date_create(date("Y-m-d", $time));
+$timestampDayNow = date_timestamp_get($dateArray1);
+$date1 = date("d-m-Y", $timestampDayNow);
+
+$dateArray2 = date_create("2016-05-16");
+$timeDaystampSearch = date_timestamp_get($dateArray2);
+$date2 = date("d-m-Y", $timeDaystampSearch);
+
+$dayBetween = ($timestampDayNow - $timeDaystampSearch) / (60 * 60 * 24);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +28,7 @@ $message = date("d/m/Y", $time);
 
     <p>===================================</p>
 
-    <?= $message ?>
+    <?= $date1 . " - " . $date2 . " / il y a <b>" . $dayBetween . "</b> jours entre les 2 dates." ?>
 
 </body>
 
