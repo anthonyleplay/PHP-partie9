@@ -1,5 +1,5 @@
 <?php
-$time = time() - (60*60*24*20);
+$time = time() - (60*60*24*22);
 $message = date("d/m/Y", $time) ;
 ?>
 
@@ -14,7 +14,7 @@ $message = date("d/m/Y", $time) ;
 
 <body>
     <h1>Exercice 8</h1>
-    <p>Afficher la date du jour - 20 jours.</p>
+    <p>Afficher la date du jour - 22 jours.</p>
 
 
     <p>===================================</p>

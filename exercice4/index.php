@@ -1,9 +1,9 @@
 <?php
 $time = time();
-$date = date_create(date("Y-m-d", $time));
-$message = date_timestamp_get($date);
+$date1 = date_create(date("Y-m-d", $time));
+$timestampDate1 = date_timestamp_get($date1);
 $date2 = date_create("02-08-2016 15:00");
-$message2 = date_timestamp_get($date2);
+$timestampDate2 = date_timestamp_get($date2);
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +23,8 @@ $message2 = date_timestamp_get($date2);
 
     <p>===================================</p>
 
-    <?= $message  . " - " . date("Y-m-d", $time) ?><br>
-    <?= $message2 . " - " . "02-08-2016 15:00"?>
+    <?= $timestampDate1  . " - " . date("Y-m-d", $time) ?><br>
+    <?= $timestampDate2 . " - " . "02-08-2016 15:00"?>
 
 </body>
 
