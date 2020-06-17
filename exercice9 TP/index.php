@@ -1,9 +1,9 @@
 <?php
 $postOk = false; // verif pour le message
 $scriptWrite = "";
-$message = "merci de séléctionner une date";
+$message = "Merci de séléctionner une date";
 // on verif si le post a bien ete envoyé
-if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $time = time();
     // on recupere les 2 valeurs du formulaire ( mois et année)
     $mouth = $_POST["selectmouth"];
@@ -95,20 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = $nameMouth . " - " . $_POST["selectyear"]; //le message
 } else {
     $postOk = false; // verif pour le message
-    $message = "merci de séléctionner une date"; //le message
+    $message = "Merci de séléctionner une date"; //le message
 }
-
-
-
-$dateArray1 = date_create("2016-02-01");
-$timestamp1fevrier = date_timestamp_get($dateArray1);
-$date1 = date("d-m-Y", $timestamp1fevrier);
-
-$dateArray2 = date_create("2016-03-01");
-$timeDaystamp1mars = date_timestamp_get($dateArray2);
-$date2 = date("d-m-Y", $timeDaystamp1mars);
-
-$dayBetween = ($timeDaystamp1mars - $timestamp1fevrier) / (60 * 60 * 24);
 ?>
 
 <!DOCTYPE html>
@@ -124,15 +112,15 @@ $dayBetween = ($timeDaystamp1mars - $timestamp1fevrier) / (60 * 60 * 24);
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-10">
+            <div class="col-6 mb-3 border py-2">
                 <h1>Exercice 9</h1>
                 <p>Faire un formulaire avec deux listes déroulantes. La première sert à choisir le mois, et le deuxième permet d'avoir l'année. <br>
                     En fonction des choix, afficher un calendrier comme celui-ci :</p>
                 <a href="http://icalendrier.fr/media/imprimer/2017/mensuel/calendrier-2017-mensuel-bigthumb.png">Image du calendrier exemple</a>
-                <hr>
+
 
             </div>
-            <div class="col-10 mb-3">
+            <div class="col-6 mb-3 border py-5 text-center">
                 <form action="index.php" method="post">
                     <label for="selectmouth">choisir un mois</label>
                     <select id="selectmouth" name="selectmouth" required>
@@ -160,7 +148,8 @@ $dayBetween = ($timeDaystamp1mars - $timestamp1fevrier) / (60 * 60 * 24);
                     <input type="submit" value="Envoyer">
 
                 </form>
-            </div><br>
+            </div>
+            <hr>
             <div class="col-8 h4 py-2 bg-dark text-white text-center">
                 <span><?= $message ?></span>
             </div>
@@ -238,13 +227,11 @@ $dayBetween = ($timeDaystamp1mars - $timestamp1fevrier) / (60 * 60 * 24);
     <?= $scriptWrite; ?>
     <script>
         for (let i = 1; i <= 42; i++) {
-            let idcalendar = document.getElementById("calendarCase" + i );
+            let idcalendar = document.getElementById("calendarCase" + i);
             if (idcalendar.innerHTML == "") {
-                idcalendar.style.backgroundColor = 'lightgrey' ;
-            }
-        }
-
-
+                idcalendar.style.backgroundColor = '#f8f9fa';
+            };
+        };
     </script>
 </body>
 
