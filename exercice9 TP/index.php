@@ -54,12 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $postOk = true; // verif pour le message
-    //verif du mois selectioné et le nomé en FR pour le message
+    //verif du mois selectioné et le nommé en FR pour le message
     if ($_POST["selectmouth"] == "01") {
         $nameMouth = "Janvier";
     };
     if ($_POST["selectmouth"] == "02") {
-        $nameMouth = "Fevrierr";
+        $nameMouth = "Fevrier";
     };
     if ($_POST["selectmouth"] == "03") {
         $nameMouth = "Mars";
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-6 mb-3 border py-2">
+            <div class="col-12 col-md-6 mb-3 border py-2">
                 <h1>Exercice 9</h1>
                 <p>Faire un formulaire avec deux listes déroulantes. La première sert à choisir le mois, et le deuxième permet d'avoir l'année. <br>
                     En fonction des choix, afficher un calendrier comme celui-ci :</p>
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             </div>
-            <div class="col-6 mb-3 border py-5 text-center">
+            <div class="col-12 col-md-6 mb-3 border py-5 text-center">
                 <form action="index.php" method="post">
                     <label for="selectmouth">choisir un mois</label>
                     <select id="selectmouth" name="selectmouth" required>
@@ -149,14 +149,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 </form>
             </div>
-            <hr>
-            <div class="col-8 h4 py-2 bg-dark text-white text-center">
+            <div class="col-12 col-md-8 h4 py-2 bg-dark text-white text-center">
                 <span><?= $message ?></span>
             </div>
             <?php
             if ($postOk) {
             ?>
-                <table class="col-8">
+                <table class="col-12 col-md-8">
                     <tr>
                         <th class="bg-secondary text-center text-white border" style="width:10%">Lundi</th>
                         <th class="bg-secondary text-center text-white border" style="width:10%">Mardi</th>
