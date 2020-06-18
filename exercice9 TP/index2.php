@@ -1,98 +1,51 @@
 <?php
 $postOk = false; // verif pour le message
-$scriptWrite = "";
 $message = "Merci de séléctionner une date";
+$yearMin = 1970;
+$yearMax = 2025;
+$daysInWeekArray = [ 
+    "lundi" => 1 ,
+    "mardi" => 2 ,
+    "mercredi" => 3 ,
+    "jeudi" => 4 ,
+    "vendredi" => 5 ,
+    "samedi" => 6 ,
+    "dimanche" => 7
+];
+$monthsArray = [ 
+    "01" => "janvier" ,
+    "02" => "fevrier" ,
+    "03" => "mars" ,
+    "04" => "avril" ,
+    "05" => "mai" ,
+    "06" => "juin" ,
+    "07" => "juillet" ,
+    "08" => "août" ,
+    "09" => "septembre" ,
+    "10" => "octobre" ,
+    "11" => "novembre" ,
+    "12" => "decembre" 
+];
 // on verif si le post a bien ete envoyé
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // on recupere les 2 valeurs du formulaire ( mois et année)
-    $mouth = $_POST["selectmouth"];
+    $month = $_POST["selectmonth"];
     $year = $_POST["selectyear"];
     //on recupere le timestamp du 1er jour du mois selectioné
-    $timestampDateSelect = date_timestamp_get(date_create("$year-$mouth-01"));
+    $timestampDateSelect = date_timestamp_get(date_create("$year-$month-01"));
     // variable qui recupere le nom du jour ( lundi, mardi ...) en FR
     setlocale(LC_TIME, "fr_FR.utf8", "fra");
-    $firstDayName = strftime("%A", $timestampDateSelect);
-    var_dump($firstDayName);
+    $firstDayMonthName = strftime("%A", $timestampDateSelect);
     // nombre je jour dans le mois
-    $dayOnMouth = cal_days_in_month(CAL_GREGORIAN, $mouth, $year);
+    $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
     //si le premier jour du mois est tel jour alors on lance un FOR avec une suite de scripte qui ecrit dans les cases le num du jour
-    if ($firstDayName == "lundi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 0) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "mardi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 1) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "mercredi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 2) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "jeudi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 3) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "vendredi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 4) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "samedi") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 5) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
-    if ($firstDayName == "dimanche") {
-        for ($i = 1; $i <= $dayOnMouth; $i++) {
-            $scriptWrite .= "<script>document.getElementById('calendarCase" . ($i + 6) . "').innerHTML = '" . $i . "'</script><br>";
-        }
-    };
+    
+
 
 
     $postOk = true; // verif pour le message
     //verif du mois selectioné et le nommé en FR pour le message
-    if ($_POST["selectmouth"] == "01") {
-        $nameMouth = "Janvier";
-    };
-    if ($_POST["selectmouth"] == "02") {
-        $nameMouth = "Fevrier";
-    };
-    if ($_POST["selectmouth"] == "03") {
-        $nameMouth = "Mars";
-    };
-    if ($_POST["selectmouth"] == "04") {
-        $nameMouth = "Avril";
-    };
-    if ($_POST["selectmouth"] == "05") {
-        $nameMouth = "Mai";
-    };
-    if ($_POST["selectmouth"] == "06") {
-        $nameMouth = "Juin";
-    };
-    if ($_POST["selectmouth"] == "07") {
-        $nameMouth = "Juillet";
-    };
-    if ($_POST["selectmouth"] == "08") {
-        $nameMouth = "Août";
-    };
-    if ($_POST["selectmouth"] == "09") {
-        $nameMouth = "Septembre";
-    };
-    if ($_POST["selectmouth"] == "10") {
-        $nameMouth = "Octobre";
-    };
-    if ($_POST["selectmouth"] == "11") {
-        $nameMouth = "Novembre";
-    };
-    if ($_POST["selectmouth"] == "12") {
-        $nameMouth = "Decembre";
-    };
-
-    $message = $nameMouth . " - " . $_POST["selectyear"]; //le message
+    $message = $monthsArray[$month] . " - " . $year; //le message
 } else {
     $postOk = false; // verif pour le message
     $message = "Merci de séléctionner une date"; //le message
@@ -121,29 +74,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
             <div class="col-12 col-md-6 mb-3 border py-5 text-center bg-dark text-white">
-                <form action="index.php" method="post">
-                    <label for="selectmouth">choisir un mois</label>
-                    <select id="selectmouth" name="selectmouth" required>
+                <form action="index2.php" method="post">
+                    <label for="selectmonth">choisir un mois</label>
+                    <select id="selectmonth" name="selectmonth" required>
                         <option value="" disabled selected>. . .</option>
-                        <option value="01">Janvier</option>
-                        <option value="02">Fevrier</option>
-                        <option value="03">Mars</option>
-                        <option value="04">Avril</option>
-                        <option value="05">Mai</option>
-                        <option value="06">Juin</option>
-                        <option value="07">Juillet</option>
-                        <option value="08">Août</option>
-                        <option value="09">Septembre</option>
-                        <option value="10">Octobre</option>
-                        <option value="11">Novembre</option>
-                        <option value="12">Decembre</option>
+                        <?php foreach ($monthsArray as $key => $value) {?>
+                            <option value="<?= $key ?>" <?= isset($_POST["selectmonth"]) && $_POST["selectmonth"] == $key ? "selected" : "" ?>><?= $value ?></option>;
+                        <?php } ?>
                     </select><br>
                     <label for="selectyear">choisir une année</label>
                     <select id="selectyear" name="selectyear" required>
                         <option value="" disabled selected>. . .</option>
-                        <?php for ($x = 1970; $x <= 2025; $x++) {
-                            echo "<option value=\"" . $x . "\">" . $x . "</option>";
-                        } ?>
+                        <?php for ($year = $yearMin; $year <= $yearMax; $year++) {?>
+                            <option value="<?= $year ?>" <?= isset($_POST["selectyear"]) && $_POST["selectyear"] == $year ? "selected" : "" ?>><?= $year ?></option>;
+                        <?php } ?>
                     </select><br>
                     <input type="submit" value="Envoyer">
 
