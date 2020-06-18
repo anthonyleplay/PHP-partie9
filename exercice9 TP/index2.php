@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
-        for (let i = 1; i <= 42; i++) {
+        for (let i = 2; i <= 43; i++) {
             let idcalendar = document.getElementById("calendarCase" + i);
             if (idcalendar.innerHTML == "") {
                 idcalendar.style.backgroundColor = "#f4f5f8";
