@@ -3,28 +3,28 @@ $postOk = false; // verif pour le message
 $message = "Merci de séléctionner une date";
 $yearMin = 1970;
 $yearMax = 2025;
-$daysInWeekArray = [ 
-    "lundi" => 1 ,
-    "mardi" => 2 ,
-    "mercredi" => 3 ,
-    "jeudi" => 4 ,
-    "vendredi" => 5 ,
-    "samedi" => 6 ,
+$daysInWeekArray = [
+    "lundi" => 1,
+    "mardi" => 2,
+    "mercredi" => 3,
+    "jeudi" => 4,
+    "vendredi" => 5,
+    "samedi" => 6,
     "dimanche" => 7
 ];
-$monthsArray = [ 
-    "01" => "janvier" ,
-    "02" => "fevrier" ,
-    "03" => "mars" ,
-    "04" => "avril" ,
-    "05" => "mai" ,
-    "06" => "juin" ,
-    "07" => "juillet" ,
-    "08" => "août" ,
-    "09" => "septembre" ,
-    "10" => "octobre" ,
-    "11" => "novembre" ,
-    "12" => "decembre" 
+$monthsArray = [
+    "01" => "janvier",
+    "02" => "fevrier",
+    "03" => "mars",
+    "04" => "avril",
+    "05" => "mai",
+    "06" => "juin",
+    "07" => "juillet",
+    "08" => "août",
+    "09" => "septembre",
+    "10" => "octobre",
+    "11" => "novembre",
+    "12" => "decembre"
 ];
 // on verif si le post a bien ete envoyé
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,13 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // nombre je jour dans le mois
     $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
     //si le premier jour du mois est tel jour alors on lance un FOR avec une suite de scripte qui ecrit dans les cases le num du jour
-    var_dump($firstDayMonthNumber);
-    var_dump($daysInMonth);
-
-
-
-
-
     $postOk = true; // verif pour le message
     //verif du mois selectioné et le nommé en FR pour le message
     $message = $monthsArray[$month] . " - " . $year; //le message
@@ -83,14 +76,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="selectmonth">choisir un mois</label>
                     <select id="selectmonth" name="selectmonth" required>
                         <option value="" disabled selected>. . .</option>
-                        <?php foreach ($monthsArray as $key => $value) {?>
+                        <?php foreach ($monthsArray as $key => $value) { ?>
                             <option value="<?= $key ?>" <?= isset($_POST["selectmonth"]) && $_POST["selectmonth"] == $key ? "selected" : "" ?>><?= $value ?></option>;
                         <?php } ?>
                     </select><br>
                     <label for="selectyear">choisir une année</label>
                     <select id="selectyear" name="selectyear" required>
                         <option value="" disabled selected>. . .</option>
-                        <?php for ($year = $yearMin; $year <= $yearMax; $year++) {?>
+                        <?php for ($year = $yearMin; $year <= $yearMax; $year++) { ?>
                             <option value="<?= $year ?>" <?= isset($_POST["selectyear"]) && $_POST["selectyear"] == $year ? "selected" : "" ?>><?= $year ?></option>;
                         <?php } ?>
                     </select><br>
@@ -104,33 +97,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php
             if ($postOk) {
             ?><div class="col-12 col-md-8 border py-2 text-center bg-white">
-                <table>
-                    <tr>
-                        <?php foreach ($daysInWeekArray as $key => $value) { ?>
-                            <th class="bg-dark text-center text-white border" style="width:10%"><?= $key ?></th>
-                        <?php } ?>
-                        
-                    </tr>
-                    <?php 
-                    // on utilise la boucle while pour generer les lignes du calendrier
-                    $row = 1;
-                    while($row <= 6){?>
-                     
-                        <tr class="border">
-                            <?php 
-                            //on utilise la boucle for pour generer les colonnes du calendrier
-                            for($i = 1; $i <= 7; $i++){ ?>
-                               <td class="border pb-4 pl-1 text-secondary" id="calendarCase<?= $i ?>"></td> 
+                    <table>
+                        <tr>
+                            <?php foreach ($daysInWeekArray as $key => $value) { ?>
+                                <th class="bg-dark text-center text-white border" style="width:10%"><?= $key ?></th>
                             <?php } ?>
                         </tr>
+                        <?php
+                        // on utilise la boucle while pour generer les lignes du calendrier
+                        $caseNumber = 1;
+                        $days = 1;
+                        while ($days <= $daysInMonth) { ?>
+                            <tr class="border">
+                                <?php
+                                //on utilise la boucle for pour generer les colonnes du calendrier
+                                for ($i = 1; $i <= 7; $i++) {
+                                    $caseNumber++; ?>
+                                    <td class="border pb-4 pl-1 text-secondary" id="calendarCase<?= $caseNumber ?>"><?= $caseNumber > $firstDayMonthNumber && $days <= $daysInMonth ? $days++ : "" ?></td>
+                                <?php
 
-                    <?php
-                    $row++;
-                    } ?>
-                    
-                   
-                </table>
-              </div>
+                                } ?>
+                            </tr>
+                        <?php
+                        } ?>
+                    </table>
+                </div>
             <?php }; ?>
         </div>
     </div>
