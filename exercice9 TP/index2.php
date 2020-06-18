@@ -126,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
+        // nous demarrons a 2 en raison de $caseNumber
         for (let i = 2; i <= 43; i++) {
             let idcalendar = document.getElementById("calendarCase" + i);
             if (idcalendar.innerHTML == "") {
