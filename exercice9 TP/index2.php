@@ -112,21 +112,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     </tr>
                     <?php 
-                    $i = 1;
-                    while($i <= 6){?>
+                    // on utilise la boucle while pour generer les lignes du calendrier
+                    $row = 1;
+                    while($row <= 6){?>
                      
                         <tr class="border">
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase1"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase2"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase3"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase4"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase5"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase6"></td>
-                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase7"></td>
+                            <?php 
+                            //on utilise la boucle for pour generer les colonnes du calendrier
+                            for($i = 1; $i <= 7; $i++){ ?>
+                               <td class="border pb-4 pl-1 text-secondary" id="calendarCase<?= $i ?>"></td> 
+                            <?php } ?>
                         </tr>
 
                     <?php
-                    $i++;
+                    $row++;
                     } ?>
                     
                    
