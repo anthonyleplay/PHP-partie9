@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
             <div class="col-12 col-md-6 mb-3 border py-5 text-center bg-dark text-white">
-                <form action="index2.php" method="post">
+                <form action="" method="post">
                     <label for="selectmonth">choisir un mois</label>
                     <select id="selectmonth" name="selectmonth" required>
                         <option value="" disabled selected>. . .</option>
