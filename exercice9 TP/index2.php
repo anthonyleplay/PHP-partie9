@@ -36,10 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // variable qui recupere le nom du jour ( lundi, mardi ...) en FR
     setlocale(LC_TIME, "fr_FR.utf8", "fra");
     $firstDayMonthName = strftime("%A", $timestampDateSelect);
+    $firstDayMonthNumber = $daysInWeekArray[$firstDayMonthName];
+
     // nombre je jour dans le mois
     $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
     //si le premier jour du mois est tel jour alors on lance un FOR avec une suite de scripte qui ecrit dans les cases le num du jour
-    
+    var_dump($firstDayMonthNumber);
+    var_dump($daysInMonth);
+
+
 
 
 
@@ -101,74 +106,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?><div class="col-12 col-md-8 border py-2 text-center bg-white">
                 <table>
                     <tr>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Lundi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Mardi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Mercredi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Jeudi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Vendredi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Samedi</th>
-                        <th class="bg-dark text-center text-white border" style="width:10%">Dimanche</th>
+                        <?php foreach ($daysInWeekArray as $key => $value) { ?>
+                            <th class="bg-dark text-center text-white border" style="width:10%"><?= $key ?></th>
+                        <?php } ?>
+                        
                     </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase1"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase2"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase3"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase4"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase5"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase6"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase7"></td>
-                    </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase8"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase9"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase10"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase11"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase12"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase13"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase14"></td>
-                    </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase15"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase16"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase17"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase18"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase19"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase20"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase21"></td>
-                    </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase22"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase23"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase24"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase25"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase26"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase27"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase28"></td>
-                    </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase29"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase30"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase31"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase32"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase33"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase34"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase35"></td>
-                    </tr>
-                    <tr class="border">
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase36"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase37"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase38"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase39"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase40"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase41"></td>
-                        <td class="border pb-4 pl-1 text-secondary" id="calendarCase42"></td>
-                    </tr>
+                    <?php 
+                    $i = 1;
+                    while($i <= 6){?>
+                     
+                        <tr class="border">
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase1"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase2"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase3"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase4"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase5"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase6"></td>
+                            <td class="border pb-4 pl-1 text-secondary" id="calendarCase7"></td>
+                        </tr>
+
+                    <?php
+                    $i++;
+                    } ?>
+                    
+                   
                 </table>
               </div>
             <?php }; ?>
         </div>
     </div>
-    <?= $scriptWrite; ?>
     <script>
         for (let i = 1; i <= 42; i++) {
             let idcalendar = document.getElementById("calendarCase" + i);
